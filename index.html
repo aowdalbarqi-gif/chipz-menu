@@ -112,26 +112,111 @@ html{scroll-behavior:smooth;}
 <div class="cart-sidebar" id="cartSidebar"><div class="cart-header"><h2>🛒 سلة الطلبات</h2><button class="cart-close" onclick="closeCart()">✕</button></div><div class="cart-items" id="cartItems"><div class="cart-empty"><span class="empty-icon">🛒</span><p>سلتك فارغة!</p></div></div><div class="cart-footer"><div class="cart-total"><span>المجموع:</span><span id="cartTotal">0 ريال</span></div><div class="cart-note"><label>📝 ملاحظات للطلب (اختياري):</label><textarea id="orderNote" rows="2" placeholder="مثال: بدون ملح، إضافة كاتشب..."></textarea></div><div class="whatsapp-section"><h3>📲 أرسل طلبك عبر واتساب:</h3><div class="whatsapp-btns"><button class="wa-btn wa-btn-1" onclick="sendToWhatsApp('966507060247')"><span class="wa-icon">💬</span> إرسال - رقم 1</button><button class="wa-btn wa-btn-2" onclick="sendToWhatsApp('966506954399')"><span class="wa-icon">💬</span> إرسال - رقم 2</button></div><button class="send-all-btn" onclick="sendToAll()">🚀 إرسال للجميع دفعة واحدة</button></div></div></div>
 <div class="toast" id="toast"></div>
 <script>
-const MENU=[{id:1,emoji:"🥔",name:"بطاطس عمان",desc:"بطاطس مقرمشة بنكهة عمان المميزة",price:17},{id:2,emoji:"🌽",name:"بطاطس دريتوس",desc:"بطاطس بنكهة الدريتوس الشهية",price:17},{id:3,emoji:"🍟",name:"بطاطس شيبز",desc:"بطاطس شيبز بالنكهة الأصلية المميزة",price:17},{id:4,emoji:"🍟",name:"بطاطس كلاسيك",desc:"بطاطس مقلية ذهبية مقرمشة مع صلصة الكاتشب والمايونيز",price:15},{id:5,emoji:"🥤",name:"مشروبات غازية",desc:"مشروبات غازية متنوعة باردة",price:3},{id:6,emoji:"💧",name:"ماء",desc:"ماء معدني بارد",price:1}];
-let cart=[];let quantities={};
-MENU.forEach(i=>quantities[i.id]=1);
-function changeQty(id,d){quantities[id]=Math.max(1,(quantities[id]||1)+d);document.getElementById("qty"+id).textContent=quantities[id];}
-function addToCart(id){const item=MENU.find(m=>m.id===id);const qty=quantities[id]||1;const ex=cart.find(c=>c.id===id);if(ex){ex.qty+=qty;}else{cart.push({...item,qty});}updateCartUI();showToast("تمت الاضافة: "+item.name);const btn=document.getElementById("addbtn"+id);btn.textContent="تمت الإضافة!";btn.classList.add("added");setTimeout(()=>{btn.textContent="+ أضف للسلة";btn.classList.remove("added");},1500);}
-function changeCartQty(id,d){const item=cart.find(c=>c.id===id);if(!item)return;item.qty=Math.max(1,item.qty+d);updateCartUI();}
-function removeFromCart(id){cart=cart.filter(c=>c.id!==id);updateCartUI();}
-function updateCartUI(){const ti=cart.reduce((s,c)=>s+c.qty,0);document.getElementById("cartCount").textContent=ti;const tp=cart.reduce((s,c)=>s+c.price*c.qty,0);document.getElementById("cartTotal").textContent=tp+" ريال";const el=document.getElementById("cartItems");if(cart.length===0){el.innerHTML='<div class="cart-empty"><span class="empty-icon">🛒</span><p>سلتك فارغة!</p></div>';return;}el.innerHTML=cart.map(c=>'<div class="cart-item"><div class="cart-item-info"><div class="cart-item-name">'+c.emoji+' '+c.name+'</div><div class="cart-item-price">'+c.price*c.qty+' ريال</div></div><div class="cart-item-qty"><button class="cart-qty-btn" onclick="changeCartQty('+c.id+',-1)">-</button><span>'+c.qty+'</span><button class="cart-qty-btn" onclick="changeCartQty('+c.id+',1)">+</button></div><button class="remove-btn" onclick="removeFromCart('+c.id+')">🗑️</button></div>').join("");}
-function openCart(){document.getElementById("cartOverlay").classList.add("open");document.getElementById("cartSidebar").classList.add("open");}
-function closeCart(){document.getElementById("cartOverlay").classList.remove("open");document.getElementById("cartSidebar").classList.remove("open");}
-function buildMessage(){if(cart.length===0){showToast("أضف شيئاً للسلة أولاً!");return null;}const total=cart.reduce((s,c)=>s+c.price*c.qty,0);const note=document.getElementById("orderNote").value.trim();let msg="🍟 طلب جديد - شيبز CHIPZ 🍟
-";cart.forEach(c=>{msg+=c.emoji+" "+c.name+" x"+c.qty+" = "+c.price*c.qty+" ريال
-";});msg+="المجموع: "+total+" ريال
-";if(note)msg+="ملاحظات: "+note+"
-";msg+="الاستلام من: بارق - الساحة الشعبية";return msg;}
-function sendToWhatsApp(n){const msg=buildMessage();if(!msg)return;window.open("https://wa.me/"+n+"?text="+encodeURIComponent(msg),"_blank");}
-function sendToAll(){const msg=buildMessage();if(!msg)return;["966507060247","966506954399"].forEach((n,i)=>{setTimeout(()=>{window.open("https://wa.me/"+n+"?text="+encodeURIComponent(msg),"_blank");},i*600);});}
-function showToast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2800);}
-const grid=document.getElementById("menuGrid");
-grid.innerHTML=MENU.map(item=>'<div class="menu-card"><div class="menu-card-header">'+item.emoji+'</div><div class="menu-card-body"><h3>'+item.name+'</h3><p>'+item.desc+'</p><div class="menu-price">'+item.price+' ريال</div><div class="menu-controls"><div class="qty-control"><button class="qty-btn" onclick="changeQty('+item.id+',-1)">-</button><span class="qty-num" id="qty'+item.id+'">1</span><button class="qty-btn" onclick="changeQty('+item.id+',1)">+</button></div><button class="add-btn" id="addbtn'+item.id+'" onclick="addToCart('+item.id+')">+ أضف للسلة</button></div></div></div>').join("");
+const MENU=[
+  {id:1,emoji:"🥔",name:"بطاطس عمان",desc:"بطاطس مقرمشة بنكهة عمان المميزة",price:17},
+  {id:2,emoji:"🌽",name:"بطاطس دريتوس",desc:"بطاطس بنكهة الدريتوس الشهية",price:17},
+  {id:3,emoji:"🍟",name:"بطاطس شيبز",desc:"بطاطس شيبز بالنكهة الأصلية المميزة",price:17},
+  {id:4,emoji:"🍟",name:"بطاطس كلاسيك",desc:"بطاطس مقلية ذهبية مقرمشة مع صلصة الكاتشب والمايونيز",price:15},
+  {id:5,emoji:"🥤",name:"مشروبات غازية",desc:"مشروبات غازية متنوعة باردة",price:3},
+  {id:6,emoji:"💧",name:"ماء",desc:"ماء معدني بارد",price:1}
+];
+var cart=[];
+var quantities={};
+MENU.forEach(function(i){quantities[i.id]=1;});
+
+function changeQty(id,d){
+  quantities[id]=Math.max(1,(quantities[id]||1)+d);
+  document.getElementById('qty'+id).textContent=quantities[id];
+}
+
+function addToCart(id){
+  var item=MENU.find(function(m){return m.id===id;});
+  var qty=quantities[id]||1;
+  var ex=cart.find(function(c){return c.id===id;});
+  if(ex){ex.qty+=qty;}else{cart.push({id:item.id,emoji:item.emoji,name:item.name,desc:item.desc,price:item.price,qty:qty});}
+  updateCartUI();
+  showToast('تمت الاضافة: '+item.name);
+  var btn=document.getElementById('addbtn'+id);
+  btn.textContent='تمت الإضافة!';
+  btn.classList.add('added');
+  setTimeout(function(){btn.textContent='+ أضف للسلة';btn.classList.remove('added');},1500);
+}
+
+function changeCartQty(id,d){
+  var item=cart.find(function(c){return c.id===id;});
+  if(!item)return;
+  item.qty=Math.max(1,item.qty+d);
+  updateCartUI();
+}
+
+function removeFromCart(id){
+  cart=cart.filter(function(c){return c.id!==id;});
+  updateCartUI();
+}
+
+function updateCartUI(){
+  var ti=cart.reduce(function(s,c){return s+c.qty;},0);
+  document.getElementById('cartCount').textContent=ti;
+  var tp=cart.reduce(function(s,c){return s+c.price*c.qty;},0);
+  document.getElementById('cartTotal').textContent=tp+' ريال';
+  var el=document.getElementById('cartItems');
+  if(cart.length===0){
+    el.innerHTML='<div class="cart-empty"><span class="empty-icon">🛒</span><p>سلتك فارغة!</p></div>';
+    return;
+  }
+  el.innerHTML=cart.map(function(c){
+    return '<div class="cart-item"><div class="cart-item-info"><div class="cart-item-name">'+c.emoji+' '+c.name+'</div><div class="cart-item-price">'+c.price*c.qty+' ريال</div></div><div class="cart-item-qty"><button class="cart-qty-btn" onclick="changeCartQty('+c.id+',-1)">-</button><span>'+c.qty+'</span><button class="cart-qty-btn" onclick="changeCartQty('+c.id+',1)">+</button></div><button class="remove-btn" onclick="removeFromCart('+c.id+')">X</button></div>';
+  }).join('');
+}
+
+function openCart(){
+  document.getElementById('cartOverlay').classList.add('open');
+  document.getElementById('cartSidebar').classList.add('open');
+}
+
+function closeCart(){
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.getElementById('cartSidebar').classList.remove('open');
+}
+
+function buildMessage(){
+  if(cart.length===0){showToast('أضف شيئاً للسلة أولاً!');return null;}
+  var total=cart.reduce(function(s,c){return s+c.price*c.qty;},0);
+  var note=document.getElementById('orderNote').value.trim();
+  var msg='طلب جديد - شيبز CHIPZ\n';
+  cart.forEach(function(c){msg+=c.emoji+' '+c.name+' x'+c.qty+' = '+c.price*c.qty+' ريال\n';});
+  msg+='المجموع: '+total+' ريال\n';
+  if(note)msg+='ملاحظات: '+note+'\n';
+  msg+='الاستلام من: بارق - الساحة الشعبية';
+  return msg;
+}
+
+function sendToWhatsApp(n){
+  var msg=buildMessage();
+  if(!msg)return;
+  window.open('https://wa.me/'+n+'?text='+encodeURIComponent(msg),'_blank');
+}
+
+function sendToAll(){
+  var msg=buildMessage();
+  if(!msg)return;
+  var nums=['966507060247','966506954399'];
+  nums.forEach(function(n,i){
+    setTimeout(function(){window.open('https://wa.me/'+n+'?text='+encodeURIComponent(msg),'_blank');},i*600);
+  });
+}
+
+function showToast(m){
+  var t=document.getElementById('toast');
+  t.textContent=m;
+  t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show');},2800);
+}
+
+var grid=document.getElementById('menuGrid');
+grid.innerHTML=MENU.map(function(item){
+  return '<div class="menu-card"><div class="menu-card-header">'+item.emoji+'</div><div class="menu-card-body"><h3>'+item.name+'</h3><p>'+item.desc+'</p><div class="menu-price">'+item.price+' ريال</div><div class="menu-controls"><div class="qty-control"><button class="qty-btn" onclick="changeQty('+item.id+',-1)">-</button><span class="qty-num" id="qty'+item.id+'">1</span><button class="qty-btn" onclick="changeQty('+item.id+',1)">+</button></div><button class="add-btn" id="addbtn'+item.id+'" onclick="addToCart('+item.id+')">+ أضف للسلة</button></div></div></div>';
+}).join('');
 </script>
 </body>
 </html>
