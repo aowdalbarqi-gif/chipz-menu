@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head><meta charset="UTF-8"><title>شيبز CHIPZ</title></head>
+<body><h1>test</h1></body>
+</html><!DOCTYPE html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شيبز CHIPZ - مطعم البطاطس</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Cairo',sans-serif;background:#fff;color:#222;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(90deg,rgba(192,0,10,0.05) 0px,rgba(192,0,10,0.05) 50px,transparent 50px,transparent 100px);pointer-events:none;z-index:0;}
+nav{position:sticky;top:0;z-index:1000;background:linear-gradient(135deg,#c0000a,#8b0000);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:70px;box-shadow:0 3px 15px rgba(0,0,0,0.3);}
+.nav-logo{font-size:1.8rem;font-weight:900;color:#fff;letter-spacing:2px;}
+.nav-logo span{color:#ffe066;}
+.nav-links{display:flex;gap:25px;list-style:none;align-items:center;}
+.nav-links a{color:#fff;text-decoration:none;font-size:1rem;font-weight:600;transition:color 0.3s;}
+.nav-links a:hover{color:#ffe066;}
+.cart-btn{background:#ffe066;color:#8b0000;border:none;padding:8px 18px;border-radius:30px;font-family:'Cairo',sans-serif;font-weight:900;font-size:1rem;cursor:pointer;display:flex;align-items:center;gap:6px;}
+.cart-count{background:#8b0000;color:#ffe066;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:900;}
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:60px 20px;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(90deg,rgba(192,0,10,0.07) 0px,rgba(192,0,10,0.07) 60px,transparent 60px,transparent 120px);}
+.hero-content{position:relative;z-index:2;}
+.hero-badge{display:inline-block;background:#c0000a;color:#fff;padding:6px 20px;border-radius:30px;font-size:0.9rem;font-weight:700;margin-bottom:20px;}
+.hero h1{font-size:5rem;font-weight:900;color:#c0000a;letter-spacing:6px;line-height:1.1;margin-bottom:15px;}
+.hero-sub{font-size:1.5rem;color:#555;margin-bottom:10px;font-weight:600;}
+.hero-desc{font-size:1.1rem;color:#777;margin-bottom:35px;}
+.hero-emoji{font-size:5rem;margin-bottom:15px;display:block;animation:bounce 2s infinite;}
+.btn-primary{background:linear-gradient(135deg,#c0000a,#8b0000);color:#fff;border:none;padding:16px 45px;font-size:1.1rem;font-family:'Cairo',sans-serif;font-weight:700;border-radius:50px;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 6px 20px rgba(192,0,10,0.4);}
+.about-strip{background:linear-gradient(135deg,#c0000a,#8b0000);color:#fff;text-align:center;padding:25px 20px;font-size:1.05rem;font-weight:600;position:relative;z-index:1;}
+.section{position:relative;z-index:1;padding:70px 40px;text-align:center;background:#fff;}
+.section-alt{background:#fafafa;}
+.section-title{font-size:2.2rem;font-weight:900;color:#c0000a;margin-bottom:10px;}
+.section-line{width:80px;height:4px;background:linear-gradient(to right,#c0000a,#ffe066);margin:0 auto 50px;border-radius:2px;}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;max-width:900px;margin:0 auto;}
+.feature-card{background:#fff;border:2px solid #f0f0f0;border-radius:20px;padding:35px 20px;transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;}
+.feature-card:hover{transform:translateY(-8px);box-shadow:0 15px 35px rgba(192,0,10,0.15);border-color:#c0000a;}
+.feature-icon{font-size:3rem;margin-bottom:15px;display:block;}
+.feature-card h3{font-size:1.1rem;font-weight:700;color:#c0000a;margin-bottom:8px;}
+.feature-card p{font-size:0.9rem;color:#777;line-height:1.6;}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;max-width:1100px;margin:0 auto;}
+.menu-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.08);transition:transform 0.3s,box-shadow 0.3s;border:2px solid transparent;}
+.menu-card:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(192,0,10,0.2);border-color:#c0000a;}
+.menu-card-header{background:linear-gradient(135deg,#c0000a,#8b0000);padding:25px 20px;font-size:3.5rem;}
+.menu-card-body{padding:20px;}
+.menu-card-body h3{font-size:1.2rem;font-weight:800;color:#222;margin-bottom:6px;}
+.menu-card-body p{font-size:0.9rem;color:#888;line-height:1.5;margin-bottom:12px;}
+.menu-price{font-size:1.1rem;font-weight:900;color:#c0000a;margin-bottom:14px;}
+.menu-controls{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.qty-control{display:flex;align-items:center;gap:8px;background:#f5f5f5;border-radius:30px;padding:4px 10px;}
+.qty-btn{background:#c0000a;color:#fff;border:none;width:28px;height:28px;border-radius:50%;font-size:1.1rem;cursor:pointer;font-weight:700;}
+.qty-num{font-weight:700;font-size:1rem;min-width:20px;text-align:center;}
+.add-btn{background:linear-gradient(135deg,#c0000a,#8b0000);color:#fff;border:none;padding:9px 18px;border-radius:30px;font-family:'Cairo',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;}
+.add-btn.added{background:linear-gradient(135deg,#2e7d32,#1b5e20);}
+.cart-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:2000;display:none;opacity:0;transition:opacity 0.3s;}
+.cart-overlay.open{display:block;opacity:1;}
+.cart-sidebar{position:fixed;left:0;top:0;width:400px;max-width:95vw;height:100%;background:#fff;z-index:2001;transform:translateX(-100%);transition:transform 0.3s ease;display:flex;flex-direction:column;box-shadow:5px 0 30px rgba(0,0,0,0.2);}
+.cart-sidebar.open{transform:translateX(0);}
+.cart-header{background:linear-gradient(135deg,#c0000a,#8b0000);color:#fff;padding:20px 25px;display:flex;align-items:center;justify-content:space-between;}
+.cart-header h2{font-size:1.3rem;font-weight:900;}
+.cart-close{background:rgba(255,255,255,0.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:1.3rem;cursor:pointer;}
+.cart-items{flex:1;overflow-y:auto;padding:20px;}
+.cart-empty{text-align:center;padding:60px 20px;color:#aaa;}
+.cart-empty .empty-icon{font-size:4rem;display:block;margin-bottom:15px;}
+.cart-item{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid #f0f0f0;}
+.cart-item-info{flex:1;}
+.cart-item-name{font-weight:700;font-size:1rem;color:#222;}
+.cart-item-price{font-size:0.9rem;color:#c0000a;font-weight:600;margin-top:3px;}
+.cart-item-qty{display:flex;align-items:center;gap:8px;}
+.cart-qty-btn{background:#f0f0f0;border:none;width:28px;height:28px;border-radius:50%;font-size:1rem;cursor:pointer;font-weight:700;}
+.cart-qty-btn:hover{background:#c0000a;color:#fff;}
+.remove-btn{background:none;border:none;color:#ccc;font-size:1.2rem;cursor:pointer;padding:5px;}
+.remove-btn:hover{color:#c0000a;}
+.cart-footer{padding:20px;border-top:2px solid #f0f0f0;background:#fafafa;}
+.cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;font-size:1.1rem;font-weight:900;}
+.cart-total span:last-child{color:#c0000a;font-size:1.3rem;}
+.cart-note{margin-bottom:15px;}
+.cart-note label{display:block;font-weight:700;margin-bottom:6px;font-size:0.9rem;color:#555;}
+.cart-note textarea{width:100%;border:2px solid #e0e0e0;border-radius:12px;padding:10px;font-family:'Cairo',sans-serif;font-size:0.9rem;resize:none;outline:none;}
+.cart-note textarea:focus{border-color:#c0000a;}
+.whatsapp-section h3{font-size:1rem;font-weight:700;color:#555;margin-bottom:10px;text-align:center;}
+.whatsapp-btns{display:flex;flex-direction:column;gap:10px;}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:13px 20px;border-radius:30px;border:none;font-family:'Cairo',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;text-decoration:none;}
+.wa-btn-1{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;}
+.wa-btn-2{background:linear-gradient(135deg,#25D366,#075E54);color:#fff;}
+.wa-btn-3{background:linear-gradient(135deg,#128C7E,#075E54);color:#fff;}
+.wa-icon{font-size:1.3rem;}
+.send-all-btn{background:linear-gradient(135deg,#c0000a,#8b0000);color:#fff;border:none;width:100%;padding:14px;border-radius:30px;font-family:'Cairo',sans-serif;font-weight:900;font-size:1rem;cursor:pointer;margin-top:10px;}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;max-width:900px;margin:0 auto;}
+.contact-card{background:linear-gradient(135deg,#c0000a,#8b0000);color:#fff;border-radius:20px;padding:30px 20px;text-align:center;}
+.contact-card .icon{font-size:2.5rem;margin-bottom:12px;display:block;}
+.contact-card h3{font-size:1rem;font-weight:700;margin-bottom:6px;opacity:0.85;}
+.contact-card p{font-size:1.05rem;font-weight:700;}
+footer{background:#1a0000;color:#ccc;text-align:center;padding:25px;font-size:0.9rem;position:relative;z-index:1;}
+footer span{color:#ff4444;font-weight:700;}
+.stripes-divider{height:12px;background:repeating-linear-gradient(90deg,#c0000a 0px,#c0000a 30px,#fff 30px,#fff 60px);}
+html{scroll-behavior:smooth;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);}}
+.toast{position:fixed;bottom:30px;right:30px;background:#2e7d32;color:#fff;padding:12px 25px;border-radius:30px;font-family:'Cairo',sans-serif;font-weight:700;font-size:1rem;z-index:9999;transform:translateY(100px);opacity:0;transition:all 0.4s;}
+.toast.show{transform:translateY(0);opacity:1;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo">&#x1F954; <span>CHIPZ</span> شيبز</div>
+  <ul class="nav-links">
+    <li><a href="#hero">الرئيسية</a></li>
+    <li><a href="#menu">القائمة</a></li>
+    <li><a href="#features">مميزاتنا</a></li>
+    <li><a href="#contact">تواصل معنا</a></li>
+    <li><button class="cart-btn" onclick="openCart()">🛒 سلة الطلب <span class="cart-count" id="cartCount">0</span></button></li>
+  </ul>
+</nav>
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🏆 الأفضل في بارق</div>
+    <span class="hero-emoji">&#x1F35F;</span>
+    <h1>CHIPZ شيبز</h1>
+    <p class="hero-sub">عالم البطاطس اللذيذة</p>
+    <p class="hero-desc">اطلب الآن وادفع مسبقاً — يصل طلبك جاهزاً بانتظارك! 🚀</p>
+    <a href="#menu" class="btn-primary">&#x1F35F; اطلب الآن</a>
+  </div>
+</section>
+<div class="stripes-divider"></div>
+<div class="about-strip">&#x1F954; بطاطس طازجة يومياً &nbsp;|&nbsp; 🔥 اطلب مسبقاً وادفع قبل الوصول &nbsp;|&nbsp; ⚡ طلبك جاهز عند وصولك &nbsp;|&nbsp; 📍 بارق - الساحة الشعبية</div>
+<div class="stripes-divider"></div>
+<section class="section" id="features">
+  <h2 class="section-title">لماذا شيبز؟</h2>
+  <div class="section-line"></div>
+  <div class="features-grid">
+    <div class="feature-card"><span class="feature-icon">&#x1F954;</span><h3>بطاطس طازجة</h3><p>نستخدم أجود أنواع البطاطس الطازجة المختارة يومياً</p></div>
+    <div class="feature-card"><span class="feature-icon">🔥</span><h3>مقلية بامتياز</h3><p>تُقلى بزيت نقي عالي الجودة لتحصل على أقرمش نتيجة</p></div>
+    <div class="feature-card"><span class="feature-icon">🌶️</span><h3>نكهات متنوعة</h3><p>اختر من تشكيلة واسعة من التوابل والصلصات الشهية</p></div>
+    <div class="feature-card"><span class="feature-icon">⚡</span><h3>جاهز عند وصولك</h3><p>اطلب مسبقاً وادفع، طلبك ينتظرك!</p></div>
+  </div>
+</section>
+<div class="stripes-divider"></div>
+<section class="section section-alt" id="menu">
+  <h2 class="section-title">قائمة الطعام</h2>
+  <div class="section-line"></div>
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
+<div class="stripes-divider"></div>
+<section class="section" id="how">
+  <h2 class="section-title">كيف تطلب؟</h2>
+  <div class="section-line"></div>
+  <div class="features-grid">
+    <div class="feature-card"><span class="feature-icon">🛒</span><h3>1. اختر طلبك</h3><p>تصفح القائمة وأضف ما تريد للسلة مع تحديد الكمية</p></div>
+    <div class="feature-card"><span class="feature-icon">📱</span><h3>2. أرسل عبر واتساب</h3><p>اضغط “أرسل طلبي” وسيُرسل طلبك للمطعم على واتساب تلقائياً</p></div>
+    <div class="feature-card"><span class="feature-icon">💸</span><h3>3. ادفع مسبقاً</h3><p>سيتواصل معك فريقنا لتأكيد الطلب وإتمام الدفع</p></div>
+    <div class="feature-card"><span class="feature-icon">🎉</span><h3>4. استلم جاهزاً</h3><p>عند وصولك لبارق - الساحة الشعبية طلبك جاهز وساخن!</p></div>
+  </div>
+</section>
+<div class="stripes-divider"></div>
+<section class="section section-alt" id="contact">
+  <h2 class="section-title">تواصل معنا</h2>
+  <div class="section-line"></div>
+  <div class="contact-grid">
+    <div class="contact-card"><span class="icon">📍</span><h3>الموقع</h3><p>بارق - الساحة الشعبية</p></div>
+    <div class="contact-card"><span class="icon">🕐</span><h3>ساعات العمل</h3><p>يومياً 12 ظ - 12 م.الليل</p></div>
+    <div class="contact-card"><span class="icon">📞</span><h3>واتساب 1</h3><p dir="ltr">+966507060247</p></div>
+    <div class="contact-card"><span class="icon">📞</span><h3>واتساب 2</h3><p dir="ltr">+966506954399</p></div>
+  </div>
+</section>
+<footer>
+  <p>جميع الحقوق محفوظة &copy; 2025 &mdash; <span>شيبز CHIPZ</span> &mdash; بارق، الساحة الشعبية &#x1F954;</p>
+</footer>
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header"><h2>🛒 سلة الطلبات</h2><button class="cart-close" onclick="closeCart()">✕</button></div>
+  <div class="cart-items" id="cartItems"><div class="cart-empty"><span class="empty-icon">🛒</span><p>سلتك فارغة!<br>أضف شيئاً من القائمة</p></div></div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>المجموع:</span><span id="cartTotal">0 ريال</span></div>
+    <div class="cart-note"><label>📝 ملاحظات للطلب (اختياري):</label><textarea id="orderNote" rows="2" placeholder="مثال: بدون ملح، إضافة كاتشب..."></textarea></div>
+    <div class="whatsapp-section">
+      <h3>📲 أرسل طلبك عبر واتساب:</h3>
+      <div class="whatsapp-btns">
+        <button class="wa-btn wa-btn-1" onclick="sendToWhatsApp('+8801882808340')"><span class="wa-icon">💬</span> إرسال - رقم 1</button>
+        <button class="wa-btn wa-btn-2" onclick="sendToWhatsApp('+966507060247')"><span class="wa-icon">💬</span> إرسال - رقم 2</button>
+        <button class="wa-btn wa-btn-3" onclick="sendToWhatsApp('+966506954399')"><span class="wa-icon">💬</span> إرسال - رقم 3</button>
+      </div>
+      <button class="send-all-btn" onclick="sendToAll()">🚀 إرسال للجميع دفعة واحدة</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const MENU=[
+{id:1,emoji:"&#x1F35F;",name:"بطاطس كلاسيك",desc:"بطاطس مقلية ذهبية مقرمشة مع صلصة الكاتشب والمايونيز",price:15},
+{id:2,emoji:"&#x1F336;",name:"بطاطس حارة",desc:"بطاطس مضاف عليها بهارات حارة مع صلصة الهالبينيو",price:17},
+{id:3,emoji:"&#x1F9C0;",name:"بطاطس بالجبن",desc:"بطاطس مغطاة بصلصة الجبن الذائب الكريمية الشهية",price:20},
+{id:4,emoji:"&#x1F953;",name:"بطاطس لودد",desc:"بطاطس مع إضافات متنوعة وصلصات خاصة بطعم استثنائي",price:22},
+{id:5,emoji:"&#x1F954;",name:"ويدجز",desc:"شرائح بطاطس سميكة مخبوزة بالتوابل بطعم منزلي أصيل",price:18},
+{id:6,emoji:"&#x1F376;",name:"صلصات خاصة",desc:"تشكيلة صلصاتنا السرية: ثوم، حارة، باربيكيو، رانش",price:8}
+];
+let cart=[];let quantities={};
+MENU.forEach(i=>quantities[i.id]=1);
+function changeQty(id,d){quantities[id]=Math.max(1,(quantities[id]||1)+d);document.getElementById("qty"+id).textContent=quantities[id];}
+function addToCart(id){const item=MENU.find(m=>m.id===id);const qty=quantities[id]||1;const ex=cart.find(c=>c.id===id);if(ex){ex.qty+=qty;}else{cart.push({...item,qty});}updateCartUI();showToast("✅ تمت الإضافة: "+item.name+" × "+qty);const btn=document.getElementById("addbtn"+id);btn.textContent="✓ تمت الإضافة!";btn.classList.add("added");setTimeout(()=>{btn.textContent="+ أضف للسلة";btn.classList.remove("added");},1500);}
+function changeCartQty(id,d){const item=cart.find(c=>c.id===id);if(!item)return;item.qty=Math.max(1,item.qty+d);updateCartUI();}
+function removeFromCart(id){cart=cart.filter(c=>c.id!==id);updateCartUI();}
+function updateCartUI(){const ti=cart.reduce((s,c)=>s+c.qty,0);document.getElementById("cartCount").textContent=ti;const tp=cart.reduce((s,c)=>s+c.price*c.qty,0);document.getElementById("cartTotal").textContent=tp+" ريال";const el=document.getElementById("cartItems");if(cart.length===0){el.innerHTML='<div class="cart-empty"><span class="empty-icon">&#x1F6D2;</span><p>سلتك فارغة!<br>أضف شيئاً من القائمة</p></div>';return;}el.innerHTML=cart.map(c=>`<div class="cart-item"><div class="cart-item-info"><div class="cart-item-name">${c.emoji} ${c.name}</div><div class="cart-item-price">${c.price*c.qty} ريال (${c.price} × ${c.qty})</div></div><div class="cart-item-qty"><button class="cart-qty-btn" onclick="changeCartQty(${c.id},-1)">−</button><span>${c.qty}</span><button class="cart-qty-btn" onclick="changeCartQty(${c.id},1)">+</button><button class="remove-btn" onclick="removeFromCart(${c.id})">🗑️</button></div></div>`).join("");}
+function openCart(){document.getElementById("cartOverlay").classList.add("open");document.getElementById("cartSidebar").classList.add("open");}
+function closeCart(){document.getElementById("cartOverlay").classList.remove("open");document.getElementById("cartSidebar").classList.remove("open");}
+function buildMessage(){if(cart.length===0){showToast("❗ أضف شيئاً للسلة أولاً!");return null;}const total=cart.reduce((s,c)=>s+c.price*c.qty,0);const note=document.getElementById("orderNote").value.trim();let msg="🍟 *طلب جديد من موقع شيبز CHIPZ* 🍟\n━━━━━━━━━━━━━━━━━\n";cart.forEach(c=>{msg+=c.emoji+" "+c.name+" × "+c.qty+" = "+c.price*c.qty+" ريال\n";});msg+="━━━━━━━━━━━━━━━━━\n💰 *المجموع: "+total+" ريال*\n";if(note)msg+="📝 ملاحظات: "+note+"\n";msg+="━━━━━━━━━━━━━━━━━\n📍 سأستلم طلبي من: بارق - الساحة الشعبية\n✅ أرجو التأكيد وإرسال طريقة الدفع";return msg;}
+function sendToWhatsApp(n){const msg=buildMessage();if(!msg)return;window.open("https://wa.me/"+n.replace(/\D/g,'')+"?text="+encodeURIComponent(msg),"_blank");}
+function sendToAll(){const msg=buildMessage();if(!msg)return;["8801882808340","966507060247","966506954399"].forEach((n,i)=>{setTimeout(()=>{window.open("https://wa.me/"+n+"?text="+encodeURIComponent(msg),"_blank");},i*600);});showToast("🚀 تم فتح الواتساب للأرقام الثلاثة!");}
+function showToast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2800);}
+const grid=document.getElementById("menuGrid");grid.innerHTML=MENU.map(item=>`<div class="menu-card"><div class="menu-card-header">${item.emoji}</div><div class="menu-card-body"><h3>${item.name}</h3><p>${item.desc}</p><div class="menu-price">${item.price} ريال</div><div class="menu-controls"><div class="qty-control"><button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button><span class="qty-num" id="qty${item.id}">1</span><button class="qty-btn" onclick="changeQty(${item.id},1)">+</button></div><button class="add-btn" id="addbtn${item.id}" onclick="addToCart(${item.id})">+ أضف للسلة</button></div></div></div>`).join("");
+</script>
+</body>
+</html>
